@@ -20,15 +20,17 @@ planetsUI.forEach(planetUI => {
         let planetToRender = planetUI.getAttribute('name');
         // console.log(planetUI.getAttribute('id'));
         renderPlanet(planetToRender);
+        document.querySelector('.wrapper--solar-system').classList.add('hide');
     })
 })
 
 async function renderPlanet(planetToRender) {
     let planets = await fetchData();
+    let wrapper = document.querySelector('.wrapper--planet');
     let article = document.createElement('article');
-    let imgSection =  document.createElement('section');
-    let infoSection =  document.createElement('section');
-    let gridSection =  document.createElement('section');
+    let imgSection = document.createElement('section');
+    let infoSection = document.createElement('section');
+    let gridSection = document.createElement('section');
 
     article.classList.add('planet');
     imgSection.classList.add('planet__img');
@@ -38,16 +40,31 @@ async function renderPlanet(planetToRender) {
     planets.forEach(planet => {
         if (planetToRender === planet.latinName) {
             console.log(planet.name);
-            createImgEl(planet);
+            let img = createImgEl(planet);
             // ^ Ska läggas imgSection 
-            createHeaderEl(planet)
-            createLineEl();
-            createSectionEl('Omkrets', planet.circumference, 'km');
-            createSectionEl('Max temperatur', planet.temp.day, 'C');
-            createSectionEl('Min temperatur', planet.temp.night, 'C');
-            createSectionEl('KM från Solen', planet.distance, 'km');
-            createLineEl();
-            createMoonEl(planet.moons);
+            let header = createHeaderEl(planet)
+            let lineTop = createLineEl();
+            let circumFerenceSection = createSectionEl('Omkrets', planet.circumference, 'km');
+            let tempDaySection = createSectionEl('Max temperatur', planet.temp.day, 'C');
+            let tempNightSection = createSectionEl('Min temperatur', planet.temp.night, 'C');
+            let distanceSection = createSectionEl('KM från Solen', planet.distance, 'km');
+            let lineBottom = createLineEl();
+            let moonSection = createMoonEl(planet.moons);
+
+            imgSection.appendChild(img);
+            infoSection.appendChild(header);
+            infoSection.appendChild(lineTop);
+            infoSection.appendChild(gridSection).appendChild(circumFerenceSection);
+            infoSection.appendChild(gridSection).appendChild(tempDaySection);
+            infoSection.appendChild(gridSection).appendChild(tempNightSection);
+            infoSection.appendChild(gridSection).appendChild(distanceSection);
+            infoSection.appendChild(lineBottom);
+            infoSection.appendChild(moonSection);
+
+            article.appendChild(imgSection);
+            article.appendChild(infoSection);
+
+            wrapper.appendChild(article);            
         }
     })
 }

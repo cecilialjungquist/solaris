@@ -167,3 +167,10 @@ header {
     min-height: 3.1rem;
     min-width: 3.1rem;
 }
+
+
+/* HIDE */
+
+.hide {
+    display: none;
+}
