@@ -45,9 +45,9 @@ async function renderPlanet(planetToRender) {
             let header = createHeaderEl(planet)
             let lineTop = createLineEl();
             let circumFerenceSection = createSectionEl('Omkrets', planet.circumference, 'km');
+            let distanceSection = createSectionEl('KM från Solen', planet.distance, 'km');
             let tempDaySection = createSectionEl('Max temperatur', planet.temp.day, 'C');
             let tempNightSection = createSectionEl('Min temperatur', planet.temp.night, 'C');
-            let distanceSection = createSectionEl('KM från Solen', planet.distance, 'km');
             let lineBottom = createLineEl();
             let moonSection = createMoonEl(planet.moons);
 
@@ -55,9 +55,9 @@ async function renderPlanet(planetToRender) {
             infoSection.appendChild(header);
             infoSection.appendChild(lineTop);
             infoSection.appendChild(gridSection).appendChild(circumFerenceSection);
+            infoSection.appendChild(gridSection).appendChild(distanceSection);
             infoSection.appendChild(gridSection).appendChild(tempDaySection);
             infoSection.appendChild(gridSection).appendChild(tempNightSection);
-            infoSection.appendChild(gridSection).appendChild(distanceSection);
             infoSection.appendChild(lineBottom);
             infoSection.appendChild(moonSection);
 
