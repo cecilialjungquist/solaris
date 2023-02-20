@@ -3,6 +3,7 @@
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./create_functions.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
+const sunUI = document.getElementById('sun');
 
 async function fetchData() {
     const API_URL = ('https://majazocom.github.io/Data/solaris.json');
@@ -23,6 +24,15 @@ planetsUI.forEach(planetUI => {
         document.querySelector('.wrapper--solar-system').classList.add('hide');
     })
 })
+
+sunUI.addEventListener('click', () => {
+    let sun = sunUI.getAttribute('name');
+    // console.log(planetUI.getAttribute('id'));
+    renderPlanet(sun);
+    document.querySelector('.wrapper--solar-system').classList.add('hide');
+})
+
+
 
 async function renderPlanet(planetToRender) {
     let planets = await fetchData();
