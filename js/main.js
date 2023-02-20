@@ -4,6 +4,7 @@ import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonE
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
+const searchIcon = document.getElementById('search-icon');
 
 planetsUI.forEach(planetUI => {
     planetUI.addEventListener('click', () => {
@@ -19,6 +20,12 @@ sunUI.addEventListener('click', () => {
     // console.log(planetUI.getAttribute('id'));
     renderPlanet(sun);
     document.querySelector('.wrapper--solar-system').classList.add('hide');
+})
+
+searchIcon.addEventListener('click', () => {
+    let searchInput = document.getElementById('search-input');
+    // Gör detta i en egen vy istället?
+    searchInput.classList.remove('hide');
 })
 
 async function fetchData() {
