@@ -2,6 +2,7 @@ function createImgEl(planet) {
     let img = document.createElement('img');
     let src = `img/${planet.latinName.toLowerCase()}.png`;
     img.setAttribute('src', src);
+    img.classList.add(planet.latinName);
     
     console.log(img)
     return img;

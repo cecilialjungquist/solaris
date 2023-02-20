@@ -151,7 +151,7 @@ header {
     height: 8rem;
     width: 8rem;
     position: relative;
-    transform: rotateZ(55deg);
+    transform: rotateZ(60deg);
 }
 
 #saturn aside .rings {
@@ -188,7 +188,6 @@ header {
 /* PLANET */
 
 .wrapper--planet {
-    min-height: 100vh;
     display: grid;
 }
 
@@ -209,6 +208,11 @@ header {
     width: 15rem;
     box-shadow: 0px 0px 10px rgb(1, 0, 30);
     border-radius: 50%;
+}
+
+.planet__img .Saturnus {
+    border-radius: 0px;
+    box-shadow: none;
 }
 
 .planet__header {

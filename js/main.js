@@ -5,17 +5,6 @@ import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonE
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
 
-async function fetchData() {
-    const API_URL = ('https://majazocom.github.io/Data/solaris.json');
-    let data = await fetch(API_URL);
-    data = await data.json();
-    console.log(data);
-    
-    return data;
-}
-
-fetchData();
-
 planetsUI.forEach(planetUI => {
     planetUI.addEventListener('click', () => {
         let planetToRender = planetUI.getAttribute('name');
@@ -32,7 +21,14 @@ sunUI.addEventListener('click', () => {
     document.querySelector('.wrapper--solar-system').classList.add('hide');
 })
 
-
+async function fetchData() {
+    const API_URL = ('https://majazocom.github.io/Data/solaris.json');
+    let data = await fetch(API_URL);
+    data = await data.json();
+    console.log(data);
+    
+    return data;
+}
 
 async function renderPlanet(planetToRender) {
     let planets = await fetchData();
@@ -41,6 +37,8 @@ async function renderPlanet(planetToRender) {
     let imgSection = document.createElement('section');
     let infoSection = document.createElement('section');
     let gridSection = document.createElement('section');
+
+    wrapper.style.minHeight = '100vh';
 
     article.classList.add('planet');
     imgSection.classList.add('planet__img');
@@ -51,7 +49,6 @@ async function renderPlanet(planetToRender) {
         if (planetToRender === planet.latinName) {
             console.log(planet.name);
             let img = createImgEl(planet);
-            // ^ Ska läggas imgSection 
             let header = createHeaderEl(planet)
             let lineTop = createLineEl();
             let circumFerenceSection = createSectionEl('Omkrets', planet.circumference, 'km');
