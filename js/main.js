@@ -1,6 +1,6 @@
 // Kan rotation compare to earth vara kul att göra som animering i css? ta prop rotation och sätt som ms
 
-import { createImgEl, createHeaderEl, createLineEl, createSectionEl } from "./create_functions.js";
+import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./create_functions.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 
@@ -46,9 +46,8 @@ async function renderPlanet(planetToRender) {
             createSectionEl('Max temperatur', planet.temp.day, 'C');
             createSectionEl('Min temperatur', planet.temp.night, 'C');
             createSectionEl('KM från Solen', planet.distance, 'km');
-
-
-            
+            createLineEl();
+            createMoonEl(planet.moons);
         }
     })
 }

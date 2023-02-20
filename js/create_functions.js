@@ -39,4 +39,23 @@ function createSectionEl(heading, paragraph, unit) {
     return section;
 }
 
-export { createImgEl, createHeaderEl, createLineEl, createSectionEl };
+function createMoonEl(moonArray) {
+    let moons = '';
+    // Om månar finns
+    if (moonArray.length > 0) {
+        // Loopa över månana i arrayen
+        for (let i = 0; i < moonArray.length; i++) {
+            if (i < moonArray.length - 1) {
+                moons += moonArray[i] + ', ';
+            } else {
+                moons += moonArray[i];
+            }
+        }
+    } else {
+        moons = 'Saknar månar';
+    }
+    let section = createSectionEl('Månar', moons, '');
+    return section;
+}
+
+export { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl };
