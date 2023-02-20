@@ -1,0 +1,169 @@
+@import url('https://fonts.googleapis.com/css2?family=Lora:wght@400;600&family=Roboto+Condensed:wght@300&family=Ubuntu:wght@500&display=swap');
+/* 
+font-family: 'Lora', serif;
+font-family: 'Roboto Condensed', sans-serif; 
+font-family: 'Ubuntu', sans-serif;
+*/
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    color: white;
+}
+
+body {
+    min-height: 100vh;
+    background-image: url(../img/ivan-guerrero-dR7L9hHWvAI-unsplash.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+
+h1 {
+    font-family: 'Ubuntu', sans-serif;
+    text-transform: uppercase;
+    font-size: 3rem;
+    font-weight: 400;
+    letter-spacing: .1em;
+}
+
+h2,
+h3 {
+    font-family: 'Lora', serif;
+    text-transform: uppercase;
+    letter-spacing: .4em;
+    color: #00E9E9;
+    font-weight: 600;
+}
+
+header {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: .5rem;
+}
+
+/* ALL PLANETS */
+
+.solar-system {
+    display: flex;
+    gap: 3rem;
+    position: absolute;
+    top: 0;
+    left: -32rem;
+    overflow: hidden;
+}
+
+.all-planets {
+    display: flex;
+    align-items: center;
+    gap: 5vw;
+}
+
+.all-planets article {
+    display: grid;
+    place-content: center;
+}
+
+.all-planets article h3 {
+    display: none;
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.all-planets article:hover h3 {
+    display: block;
+}
+.all-planets article:hover aside {
+    display: none;
+}
+
+.all-planets article aside {
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+#sun {
+    min-height: 40rem;
+    min-width: 40rem;
+    border: 2px solid white;
+    border-radius: 50%;
+    box-shadow: 0px 0px 30px white;
+}
+#mercury {
+    min-width: 1.5rem;
+}
+#mercury aside {
+    height: 1rem;
+    width: 1rem;
+}
+
+#venus {
+    min-width: 2rem;
+}
+#venus aside {
+    height: 2rem;
+    width: 2rem;
+}
+
+#earth {
+    min-width: 2.2rem;
+}
+#earth aside {
+    height: 2.2rem;
+    width: 2.2rem;
+}
+
+#mars {
+    min-width: 1.5rem;
+}
+#mars aside {
+    height: 1rem;
+    width: 1rem;
+}
+
+#jupiter {
+    min-width: 10rem;
+}
+#jupiter aside {
+    min-height: 10rem;
+    min-width: 10rem;
+}
+
+#saturn {
+    min-width: 8rem;
+}
+#saturn aside {
+    height: 8rem;
+    width: 8rem;
+    position: relative;
+    transform: rotateZ(55deg);
+}
+
+#saturn aside .rings {
+    position: absolute;
+    top: -2rem;
+    left: 3.5rem;
+    min-height: 12rem;
+    min-width: .6rem;
+    border: 2px solid white;
+    border-radius: 50%;
+}
+
+#uranus {
+    min-width: 3rem;
+}
+#uranus aside {
+    min-height: 3rem;
+    min-width: 3rem;
+}
+
+#neptune {
+    min-width: 3.1rem;
+}
+#neptune aside {
+    min-height: 3.1rem;
+    min-width: 3.1rem;
+}
