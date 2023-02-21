@@ -21,21 +21,33 @@ sunUI.addEventListener('click', () => {
 })
 
 searchIcon.addEventListener('click', () => {
-    let searchInput = document.getElementById('search-input');
+    let searchInputField = document.getElementById('search-input');
+    // Tömmer searchInput och tidigare resultat
+    let searchInput = '';
+    search(searchInput);
 
     if (searchIcon.dataset.clickTo === 'open') {
-        // Visa inputfältet och ändra clickTo = search
-        searchInput.classList.remove('hide');
-        searchIcon.dataset.clickTo = 'search';
-    } else if (searchIcon.dataset.clickTo === 'search') {
-        // Om inputvärde finns, kalla på search
-        if (searchInput.value) {
-            search(searchInput.value);
-        } 
-        searchInput.classList.add('hide');
-        searchInput.value = '';
+        searchInputField.classList.remove('hide');
+        searchIcon.dataset.clickTo = 'close';
+    } else {
+        searchInputField.classList.add('hide');
         searchIcon.dataset.clickTo = 'open';
+        searchInputField.value = '';
     }
+
+    searchInputField.addEventListener('keydown', (e) => {
+        let inputCharacter = e.key;
+
+        if (inputCharacter === "Backspace" || inputCharacter === "Delete") {
+            searchInput = searchInput.slice(0, -1);
+        } else if (inputCharacter.length === 1) {
+            searchInput += inputCharacter;
+        }
+        // console.log(inputCharacter);
+        // console.log(searchInput);
+        search(searchInput);
+    })
+
 })
 
 async function fetchData() {

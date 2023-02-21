@@ -32,7 +32,7 @@ h2,
 h3 {
     font-family: 'Lora', serif;
     text-transform: uppercase;
-    letter-spacing: .4em;
+    letter-spacing: .3em;
     color: #00E9E9;
     font-weight: 600;
 }
@@ -41,6 +41,25 @@ p {
     font-family: 'Roboto Condensed', sans-serif; 
     font-weight: 300;
     line-height: 170%;
+}
+
+ul {
+    list-style: none;
+    font-family: 'Lora', serif;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    font-weight: 400;
+    font-size: .8rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    background-color: rgba(8, 4, 29, 0.429);
+    box-shadow: 0px 0px 10px rgba(14, 14, 14, 0.429) ;
+}
+
+li {
+    color: #00E9E9;
+    padding: .5rem;
 }
 
 header {
@@ -195,7 +214,7 @@ header {
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    padding: 1rem;
+    padding: 2rem 1rem;
     margin: auto;
 }
 
@@ -251,7 +270,7 @@ header {
 /* SEARCH */
 
 .search-section {
-    position: absolute;
+    position: fixed;
     bottom: 2rem;
     right: 2rem;
     cursor: pointer;
@@ -274,6 +293,16 @@ header {
     outline: none;
     caret-color: #00E9E9;
 } 
+
+/* MESSAGE */
+
+.message {
+    color: white;
+    font-family: 'Roboto Condensed', sans-serif; 
+    font-weight: 300;
+    text-transform: none;
+    letter-spacing: normal;
+}
 
 /* HIDE */
 
