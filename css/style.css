@@ -72,9 +72,6 @@ header {
 }
 
 nav {
-    position: absolute;
-    top: 0rem;
-    left: 0rem;
     z-index: 1;
     cursor: pointer;
     display: flex;
@@ -104,7 +101,7 @@ nav a h2 {
     color: rgba(113, 113, 113, 0.737);
 }
 
-nav:hover a h2 {
+nav a:hover h2 {
     color: #00E9E9;
 }
 
@@ -117,7 +114,7 @@ nav section {
 nav section button {
     appearance: none;
     border: none;
-    padding: .5rem;
+    padding: 0rem 1rem;
     background-color: transparent;
 }
 
@@ -132,7 +129,7 @@ nav section button {
     height: 1.2rem;
 }
 
-.pagination button svg path:hover {
+.pagination button:hover svg path {
     fill: #00E9E9;
 }
 
@@ -284,7 +281,7 @@ nav section button {
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    padding: 2rem 1rem;
+    padding: 0 1rem;
     margin: auto;
 }
 

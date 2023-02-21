@@ -5,9 +5,9 @@ import { search } from "./search_functions.js";
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
 const searchIcon = document.getElementById('search-icon');
-const previousPlanet = document.getElementById('previous-page');
-const nextPlanet = document.getElementById('next-page');
+const pagination = document.querySelectorAll('.pagination button');
 
+// Hämtar data direkt och lagrar i localStorage
 fetchData();
 
 planetsUI.forEach(planetUI => {
@@ -54,12 +54,22 @@ searchIcon.addEventListener('click', () => {
 
 })
 
-previousPlanet.addEventListener('click', () => {
-    let currentPlanet = document.querySelector('.planet__header h2').innerHTML;
-    console.log(currentPlanet);
-    // Bättre att ba smacka upp i localStorage?
+pagination.forEach(button => {
+    button.addEventListener('click', () => {
+        let currentPlanetID = parseInt(document.getElementById('page').innerHTML);
+        let planets = getLocalStorage();
+        let index = currentPlanetID;
 
-})
+        if (currentPlanetID > 0 && button.dataset.planet === 'previous') {
+            index = index -1;
+        } else if (currentPlanetID < 8 && button.dataset.planet === 'next') {
+            index = index +1;
+        } 
+
+        let newPlanet = planets[index].latinName;
+        renderPlanet(newPlanet);
+    })
+});
 
 async function fetchData() {
     try {
@@ -67,6 +77,7 @@ async function fetchData() {
         let data = await fetch(API_URL);
         data = await data.json();
         
+        // Lagra data i locaStorage
         localStorage.setItem('planets', JSON.stringify(data));
         
     } catch (error) {
@@ -91,7 +102,6 @@ function renderPlanet(planetLatinName) {
     let gridSection = document.createElement('section');
 
     wrapper.classList.remove('hide');
-    wrapper.style.minHeight = '100vh';
     wrapper.innerHTML = '';
 
     article.classList.add('planet');
