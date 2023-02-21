@@ -68,14 +68,19 @@ header {
     flex-direction: column;
     align-items: flex-end;
     gap: .5rem;
+    position: relative;
 }
 
 nav {
     position: absolute;
-    top: 2rem;
-    left: 2rem;
+    top: 0rem;
+    left: 0rem;
     z-index: 1;
     cursor: pointer;
+    display: flex;
+    padding: 2rem;
+    justify-content: space-between;
+    width: 100%;
 }
 
 nav a {
@@ -83,6 +88,11 @@ nav a {
     position: relative;
 }
 
+header svg {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 3.6rem;
+}
 nav a svg {
     position: absolute;
     top: -10px;
@@ -96,6 +106,38 @@ nav a h2 {
 
 nav:hover a h2 {
     color: #00E9E9;
+}
+
+nav section {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+nav section button {
+    appearance: none;
+    border: none;
+    padding: .5rem;
+    background-color: transparent;
+}
+
+/* PAGINATION */
+
+.pagination h3 {
+    letter-spacing: normal;
+    margin-bottom: 3px;
+}
+
+.pagination button svg {
+    height: 1.2rem;
+}
+
+.pagination button svg path:hover {
+    fill: #00E9E9;
+}
+
+#next-page {
+    transform: rotateY(180deg);
 }
 
 /* ALL PLANETS */

@@ -1,10 +1,11 @@
-import { fetchData, renderPlanet } from "./main.js";
+import { getLocalStorage, renderPlanet } from "./main.js";
 
-async function search(input) {
+function search(input) {
     input = input.toLowerCase();
-    let planets = await fetchData();
+    let planets = getLocalStorage();
     let searchResults = [];
     // console.log(input);
+    console.log(planets);
 
     if (input.length > 0) {
         for (let i = 0; i < planets.length; i++) {
@@ -41,7 +42,7 @@ function renderSearchResults(results, input) {
         ulEl.classList.add('search-results');
     }
 
-    console.log(results);
+    // Om inga resultat hittas, skriv ut meddelande. Annars renderera ut resultat.
     if (!results.length && input.length > 0) {
         let message = document.createElement('li');
         message.classList.add('message');

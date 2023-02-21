@@ -5,6 +5,10 @@ import { search } from "./search_functions.js";
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
 const searchIcon = document.getElementById('search-icon');
+const previousPlanet = document.getElementById('previous-page');
+const nextPlanet = document.getElementById('next-page');
+
+fetchData();
 
 planetsUI.forEach(planetUI => {
     planetUI.addEventListener('click', () => {
@@ -50,21 +54,37 @@ searchIcon.addEventListener('click', () => {
 
 })
 
+previousPlanet.addEventListener('click', () => {
+    let currentPlanet = document.querySelector('.planet__header h2').innerHTML;
+    console.log(currentPlanet);
+    // Bättre att ba smacka upp i localStorage?
+
+})
+
 async function fetchData() {
-    const API_URL = ('https://majazocom.github.io/Data/solaris.json');
-    let data = await fetch(API_URL);
-    data = await data.json();
-    // console.log(data);
-    
-    return data;
+    try {
+        const API_URL = ('https://majazocom.github.io/Data/solaris.json');
+        let data = await fetch(API_URL);
+        data = await data.json();
+        
+        localStorage.setItem('planets', JSON.stringify(data));
+        
+    } catch (error) {
+        console.log(error)
+    }
 }
 
-async function renderPlanet(planetLatinName) {
+function getLocalStorage() {
+    return JSON.parse(localStorage.getItem('planets'));
+}
+
+function renderPlanet(planetLatinName) {
     document.querySelector('.wrapper--solar-system').classList.add('hide');
     document.querySelector('nav').classList.remove('hide');
 
-    let planets = await fetchData();
+    let planets = getLocalStorage();
     let wrapper = document.querySelector('.wrapper--planet');
+    let pageEl = document.getElementById('page');
     let article = document.createElement('article');
     let imgSection = document.createElement('section');
     let infoSection = document.createElement('section');
@@ -105,9 +125,10 @@ async function renderPlanet(planetLatinName) {
             article.appendChild(imgSection);
             article.appendChild(infoSection);
 
-            wrapper.appendChild(article);            
+            wrapper.appendChild(article);
+            pageEl.innerHTML = planet.id;            
         }
     })
 }
 
-export { fetchData, renderPlanet };
+export { getLocalStorage, renderPlanet };
