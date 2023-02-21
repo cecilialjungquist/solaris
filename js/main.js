@@ -1,6 +1,7 @@
 // Kan rotation compare to earth vara kul att göra som animering i css? ta prop rotation och sätt som ms
 
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./create_functions.js";
+import { search } from "./search_functions.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
@@ -11,7 +12,6 @@ planetsUI.forEach(planetUI => {
         let planetToRender = planetUI.getAttribute('name');
         // console.log(planetUI.getAttribute('id'));
         renderPlanet(planetToRender);
-        document.querySelector('.wrapper--solar-system').classList.add('hide');
     })
 })
 
@@ -19,25 +19,38 @@ sunUI.addEventListener('click', () => {
     let sun = sunUI.getAttribute('name');
     // console.log(planetUI.getAttribute('id'));
     renderPlanet(sun);
-    document.querySelector('.wrapper--solar-system').classList.add('hide');
 })
 
 searchIcon.addEventListener('click', () => {
     let searchInput = document.getElementById('search-input');
-    // Gör detta i en egen vy istället?
-    searchInput.classList.remove('hide');
+
+    if (searchIcon.dataset.clickTo === 'open') {
+        // Visa inputfältet och ändra clickTo = search
+        searchInput.classList.remove('hide');
+        searchIcon.dataset.clickTo = 'search';
+    } else if (searchIcon.dataset.clickTo === 'search') {
+        // Om inputvärde finns, kalla på search
+        if (searchInput.value) {
+            search(searchInput.value);
+        } 
+        searchInput.classList.add('hide');
+        searchInput.value = '';
+        searchIcon.dataset.clickTo = 'open';
+    }
 })
 
 async function fetchData() {
     const API_URL = ('https://majazocom.github.io/Data/solaris.json');
     let data = await fetch(API_URL);
     data = await data.json();
-    console.log(data);
+    // console.log(data);
     
     return data;
 }
 
 async function renderPlanet(planetToRender) {
+    document.querySelector('.wrapper--solar-system').classList.add('hide');
+
     let planets = await fetchData();
     let wrapper = document.querySelector('.wrapper--planet');
     let article = document.createElement('article');
@@ -46,6 +59,7 @@ async function renderPlanet(planetToRender) {
     let gridSection = document.createElement('section');
 
     wrapper.style.minHeight = '100vh';
+    wrapper.innerHTML = '';
 
     article.classList.add('planet');
     imgSection.classList.add('planet__img');
@@ -82,3 +96,5 @@ async function renderPlanet(planetToRender) {
         }
     })
 }
+
+export { fetchData, renderPlanet };
