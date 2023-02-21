@@ -74,22 +74,28 @@ nav {
     position: absolute;
     top: 2rem;
     left: 2rem;
+    z-index: 1;
+    cursor: pointer;
 }
 
-nav a div {
-    width: 1rem;
-    height: 1rem;
+nav a {
+    text-decoration: none;
+    position: relative;
+}
+
+nav a svg {
+    position: absolute;
+    top: -10px;
+    left: 27px;
     animation: rotate 2s linear infinite;
-
 }
 
+nav a h2 {
+    color: rgba(113, 113, 113, 0.737);
+}
 
-@keyframes rotate {
-    from {
-        transform: rotate(0);
-    } to {
-        transform: rotate(359deg);
-    }
+nav:hover a h2 {
+    color: #00E9E9;
 }
 
 /* ALL PLANETS */
@@ -347,5 +353,13 @@ nav a div {
         opacity: 0;
     } to {
         opacity: 1;
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotateY(0);
+    } to {
+        transform: rotateY(359deg);
     }
 }

@@ -61,6 +61,7 @@ async function fetchData() {
 
 async function renderPlanet(planetLatinName) {
     document.querySelector('.wrapper--solar-system').classList.add('hide');
+    document.querySelector('nav').classList.remove('hide');
 
     let planets = await fetchData();
     let wrapper = document.querySelector('.wrapper--planet');
