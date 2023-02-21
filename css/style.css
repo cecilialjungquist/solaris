@@ -105,7 +105,7 @@ header {
 }
 
 #mercury {
-    min-width: 1.5rem;
+    min-width: 2rem;
 }
 #mercury aside {
     height: 1rem;
@@ -129,7 +129,7 @@ header {
 }
 
 #mars {
-    min-width: 1.5rem;
+    min-width: 2rem;
 }
 #mars aside {
     height: 1rem;
