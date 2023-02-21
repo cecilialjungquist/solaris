@@ -94,7 +94,7 @@ nav a svg {
     position: absolute;
     top: -10px;
     left: 27px;
-    animation: rotate 2s linear infinite;
+    animation: rotate 10s linear infinite;
 }
 
 nav a h2 {
@@ -281,7 +281,7 @@ nav section button {
     max-width: 1000px;
     display: grid;
     grid-template-columns: 1fr 2fr;
-    padding: 0 1rem;
+    padding: 0 1rem 4rem;
     margin: auto;
 }
 

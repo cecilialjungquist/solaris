@@ -71,17 +71,27 @@ pagination.forEach(button => {
     })
 });
 
+// Gör denna snyggare....
 async function fetchData() {
     try {
         const API_URL = ('https://majazocom.github.io/Data/solaris.json');
         let data = await fetch(API_URL);
-        data = await data.json();
-        
-        // Lagra data i locaStorage
-        localStorage.setItem('planets', JSON.stringify(data));
-        
+        console.log(data);
+
+        // Om data ok, lagra i localStorage
+        if (data.ok) {
+            data = await data.json();
+            localStorage.setItem('planets', JSON.stringify(data));
+        // Annars skriv ut meddelande med felkod
+        } else {
+            let section = createSectionEl('Oh, no!', `We've encountered an error of `, data.status);
+            document.querySelector('body').appendChild(section);
+            section.style.padding = '2rem';
+            document.querySelector('.wrapper--solar-system').classList.add('hide');
+        }
+
     } catch (error) {
-        console.log(error)
+        console.log('Oh no! Error: ', error);
     }
 }
 
@@ -111,7 +121,7 @@ function renderPlanet(planetLatinName) {
 
     planets.forEach(planet => {
         if (planetLatinName === planet.latinName) {
-            console.log(planet.name);
+            // console.log(planet.name);
             let img = createImgEl(planet);
             let header = createHeaderEl(planet)
             let lineTop = createLineEl();
@@ -122,20 +132,12 @@ function renderPlanet(planetLatinName) {
             let lineBottom = createLineEl();
             let moonSection = createMoonEl(planet.moons);
 
-            imgSection.appendChild(img);
-            infoSection.appendChild(header);
-            infoSection.appendChild(lineTop);
-            infoSection.appendChild(gridSection).appendChild(circumFerenceSection);
-            infoSection.appendChild(gridSection).appendChild(distanceSection);
-            infoSection.appendChild(gridSection).appendChild(tempDaySection);
-            infoSection.appendChild(gridSection).appendChild(tempNightSection);
-            infoSection.appendChild(lineBottom);
-            infoSection.appendChild(moonSection);
-
-            article.appendChild(imgSection);
-            article.appendChild(infoSection);
-
-            wrapper.appendChild(article);
+            // Lägg till element i UI
+            imgSection.append(img);
+            gridSection.append(circumFerenceSection, distanceSection, tempDaySection, tempNightSection);
+            infoSection.append(header, lineTop, gridSection, lineBottom, moonSection);
+            article.append(imgSection, infoSection);
+            wrapper.append(article);
             pageEl.innerHTML = planet.id;            
         }
     })
