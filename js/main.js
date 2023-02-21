@@ -69,6 +69,7 @@ async function renderPlanet(planetLatinName) {
     let infoSection = document.createElement('section');
     let gridSection = document.createElement('section');
 
+    wrapper.classList.remove('hide');
     wrapper.style.minHeight = '100vh';
     wrapper.innerHTML = '';
 

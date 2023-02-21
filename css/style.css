@@ -70,6 +70,28 @@ header {
     gap: .5rem;
 }
 
+nav {
+    position: absolute;
+    top: 2rem;
+    left: 2rem;
+}
+
+nav a div {
+    width: 1rem;
+    height: 1rem;
+    animation: rotate 2s linear infinite;
+
+}
+
+
+@keyframes rotate {
+    from {
+        transform: rotate(0);
+    } to {
+        transform: rotate(359deg);
+    }
+}
+
 /* ALL PLANETS */
 
 .solar-system {
