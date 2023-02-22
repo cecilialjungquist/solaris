@@ -65,11 +65,11 @@ async function fetchData() {
     try {
         const API_URL = ('https://majazocom.github.io/Data/solaris.json');
         let data = await fetch(API_URL);
-        console.log(data);
-
+        
         // Om data ok, lagra i localStorage
         if (data.ok) {
             data = await data.json();
+            console.log(data);
             localStorage.setItem('planets', JSON.stringify(data));
         // Annars skriv ut meddelande med felkod
         } else {
