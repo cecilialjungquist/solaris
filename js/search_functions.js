@@ -26,7 +26,6 @@ function search(inputString) {
             });
         }
     }
-
     renderSearchResults(searchResults, inputString);
 }
 

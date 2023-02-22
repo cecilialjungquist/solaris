@@ -1,6 +1,7 @@
 
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./create_functions.js";
 import { search } from "./search_functions.js";
+import { move } from "./rocket.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('sun');
@@ -56,6 +57,8 @@ pagination.forEach(button => {
         renderPlanet(newPlanet);
     })
 });
+
+document.addEventListener('keydown', (e) => move(e))
 
 // Gör denna snyggare....
 async function fetchData() {
