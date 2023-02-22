@@ -20,12 +20,13 @@ function search(inputString) {
     
             planetMoons.forEach(moon => {
                 // Om måne finns och planeten inte tidigare finns i sökresultaten
-                if (moon.toLowerCase().includes(inputString) &&  searchResults.indexOf(planets[i]) < 0) {
-                    searchResults.push([planets[i], 'måne'])
+                if (moon.toLowerCase().includes(inputString) && searchResults.indexOf(planets[i]) < 0) {
+                    searchResults.push(planets[i])
                 }
             });
         }
     }
+
     renderSearchResults(searchResults, inputString);
 }
 
@@ -50,22 +51,10 @@ function renderSearchResults(results, inputString) {
     } else {
         results.forEach(result => {
             let liEl = document.createElement('li');
-            let latinName = '';
-
-            // Kolla resultatet består av två objekt, mao om måne finns
-            if (result.length === 2) {
-                liEl.innerHTML = `${result[0].name} (${result[1]})`;
-                latinName = result[0].latinName;
-            } else {
-                liEl.innerHTML = result.name;
-                latinName = result.latinName;
-            }
-
-            // liEl.innerHTML = result.name;
+            liEl.innerHTML = result.name;
             ulEl.appendChild(liEl);
             liEl.addEventListener('click', () => {
-                console.log(latinName);
-                renderPlanet(latinName);
+                renderPlanet(result.latinName);
             })
         })
         // console.log(ulEl);
