@@ -1,36 +1,35 @@
 import { getLocalStorage, renderPlanet } from "./main.js";
 
-function search(input) {
-    input = input.toLowerCase();
+function search(inputString) {
+    inputString = inputString.value.toLowerCase();
     let planets = getLocalStorage();
     let searchResults = [];
-    // console.log(input);
-    console.log(planets);
 
-    if (input.length > 0) {
+    // Om inputString är längre än noll, loopa över planeter 
+    // och pusha i searchResults om matchning med inputString
+    if (inputString.length > 0) {
         for (let i = 0; i < planets.length; i++) {
     
             let planetName = planets[i].name.toLowerCase();
             let planetLatinName = planets[i].latinName.toLowerCase();
             let planetMoons = planets[i].moons;
     
-            if (planetName.includes(input) || planetLatinName.includes(input)) {
-                // console.log(planets[i]);
+            if (planetName.includes(inputString) || planetLatinName.includes(inputString)) {
                 searchResults.push(planets[i])
             } 
     
             planetMoons.forEach(moon => {
                 // Om måne finns och planeten inte tidigare finns i sökresultaten
-                if (moon.toLowerCase().includes(input) &&  searchResults.indexOf(planets[i]) < 0) {
-                    searchResults.push(planets[i])
+                if (moon.toLowerCase().includes(inputString) &&  searchResults.indexOf(planets[i]) < 0) {
+                    searchResults.push([planets[i], 'måne'])
                 }
             });
         }
     }
-    renderSearchResults(searchResults, input);
+    renderSearchResults(searchResults, inputString);
 }
 
-function renderSearchResults(results, input) {
+function renderSearchResults(results, inputString) {
     let searchSection = document.querySelector('.search-section');
     let ulEl = document.querySelector('.search-results');
 
@@ -43,7 +42,7 @@ function renderSearchResults(results, input) {
     }
 
     // Om inga resultat hittas, skriv ut meddelande. Annars renderera ut resultat.
-    if (!results.length && input.length > 0) {
+    if (!results.length && inputString.length > 0) {
         let message = document.createElement('li');
         message.classList.add('message');
         message.innerHTML = 'Oops, inget hittades!';
@@ -51,11 +50,22 @@ function renderSearchResults(results, input) {
     } else {
         results.forEach(result => {
             let liEl = document.createElement('li');
-            liEl.innerHTML = result.name;
-            ulEl.appendChild(liEl);
+            let latinName = '';
 
+            // Kolla resultatet består av två objekt, mao om måne finns
+            if (result.length === 2) {
+                liEl.innerHTML = `${result[0].name} (${result[1]})`;
+                latinName = result[0].latinName;
+            } else {
+                liEl.innerHTML = result.name;
+                latinName = result.latinName;
+            }
+
+            // liEl.innerHTML = result.name;
+            ulEl.appendChild(liEl);
             liEl.addEventListener('click', () => {
-                renderPlanet(result.latinName);
+                console.log(latinName);
+                renderPlanet(latinName);
             })
         })
         // console.log(ulEl);

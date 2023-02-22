@@ -25,33 +25,19 @@ sunUI.addEventListener('click', () => {
 })
 
 searchIcon.addEventListener('click', () => {
-    let searchInputField = document.getElementById('search-input');
-    // Tömmer searchInput och tidigare resultat
-    let searchInput = '';
-    search(searchInput);
-
+    let searchInput = document.getElementById('search-input');
+    searchInput.classList.toggle('hide');
+    
     if (searchIcon.dataset.clickTo === 'open') {
-        searchInputField.classList.remove('hide');
         searchIcon.dataset.clickTo = 'close';
     } else {
-        searchInputField.classList.add('hide');
         searchIcon.dataset.clickTo = 'open';
-        searchInputField.value = '';
-    }
 
-    searchInputField.addEventListener('keydown', (e) => {
-        let inputCharacter = e.key;
-
-        if (inputCharacter === "Backspace" || inputCharacter === "Delete") {
-            searchInput = searchInput.slice(0, -1);
-        } else if (inputCharacter.length === 1) {
-            searchInput += inputCharacter;
-        }
-        // console.log(inputCharacter);
-        // console.log(searchInput);
+        // Tömmer searchInput och rensar tidigare resultat
+        searchInput.value = '';
         search(searchInput);
-    })
-
+    }
+    searchInput.addEventListener('input', (event) => search(event.target));
 })
 
 pagination.forEach(button => {
@@ -127,8 +113,8 @@ function renderPlanet(planetLatinName) {
             let lineTop = createLineEl();
             let circumFerenceSection = createSectionEl('Omkrets', planet.circumference, 'km');
             let distanceSection = createSectionEl('KM från Solen', planet.distance, 'km');
-            let tempDaySection = createSectionEl('Max temperatur', planet.temp.day, 'C');
-            let tempNightSection = createSectionEl('Min temperatur', planet.temp.night, 'C');
+            let tempDaySection = createSectionEl('Max temperatur', planet.temp.day, '°C');
+            let tempNightSection = createSectionEl('Min temperatur', planet.temp.night, '°C');
             let lineBottom = createLineEl();
             let moonSection = createMoonEl(planet.moons);
 
