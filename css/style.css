@@ -446,9 +446,28 @@ header {
 }
 
 .launch-rocket {
-    /* animation: launchRocket 3s forwards; */
     animation: launchRocket 600ms infinite alternate;
+}
 
+.alien {
+    width: 1rem;
+    height: 1rem;
+    position: absolute;
+    border-radius: 3px 3px 0px 0px;
+    background-color: rgb(124, 209, 27);
+    border-bottom: rgb(0, 89, 0) 4px solid;
+    animation: alien 500ms infinite;
+}
+
+.game-message {
+    background-color: rgba(0, 0, 0, 0.702);
+    width: 40rem;
+    padding: 2rem;
+    text-align: center;
+    border-radius: 1rem;
+    position: absolute;
+    bottom: 0;
+    left: 6rem;
 }
 
 /* KEY FRAMES */
@@ -483,19 +502,13 @@ header {
     } to {
         box-shadow: 0px 10px 2px -2px rgba(255, 255, 255, 0.672);
     }
+}
 
-    /* 0% {
-        box-shadow: 0px 4px 2px -2px white;
-    } 30% {
-        box-shadow: 0px 10px 2px -2px white;
-    } 60% {
-        box-shadow: 0px 4px 2px -2px white;
-    } 70% {
-        box-shadow: 0px 20px 6px -2px white;
-    } 75% {
-        box-shadow: 0px 20px 5px -2px white;
-    } 100% {
-        box-shadow: none;
-    }  */
+@keyframes alien {
+    from {
+        transform: scale(0.9);
+    } to {
+        transform: scale(1);
+    }
 }
 
