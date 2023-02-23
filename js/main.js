@@ -1,10 +1,10 @@
 
-import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./create_functions.js";
-import { search } from "./search_functions.js";
+import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./createEl.js";
+import { search } from "./search.js";
 import { move } from "./rocket.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
-const sunUI = document.getElementById('sun');
+const sunUI = document.getElementById('solis');
 const searchIcon = document.getElementById('search-icon');
 const pagination = document.querySelectorAll('.pagination button');
 
@@ -13,8 +13,11 @@ fetchData();
 
 planetsUI.forEach(planetUI => {
     planetUI.addEventListener('click', () => {
-        let planetToRender = planetUI.getAttribute('name');
-        // console.log(planetUI.getAttribute('id'));
+        let planetToRender = planetUI.getAttribute('id');
+        // Uppdaterar första bokstven till versal
+        let firstLetter = planetToRender.charAt(0).toLocaleUpperCase();
+        planetToRender = firstLetter + planetToRender.slice(1);
+
         renderPlanet(planetToRender);
     })
 })

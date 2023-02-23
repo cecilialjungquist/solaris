@@ -71,7 +71,42 @@ header {
     position: relative;
 }
 
-nav {
+/* SVG */
+
+.svg--still {
+    position: absolute;
+    bottom: 1.4rem;
+    right: 3.6rem;
+}
+
+.svg--rotate {
+    position: absolute;
+    top: -10px;
+    left: 27px;
+    animation: rotate 10s linear infinite;
+}
+
+.svg--arrow {
+    height: 1.2rem;
+}
+
+.svg--star {
+    position: absolute;
+    right: .5rem;
+    top: .5rem;
+}
+
+.svg--star:hover {
+    cursor: pointer;
+}
+
+.svg--star-fill {
+    fill: #00E9E9;
+}
+
+/* NAV */
+
+.nav {
     z-index: 1;
     cursor: pointer;
     display: flex;
@@ -80,54 +115,38 @@ nav {
     width: 100%;
 }
 
-nav a {
+.nav__link {
     text-decoration: none;
     position: relative;
 }
 
-header svg {
-    position: absolute;
-    bottom: 1.4rem;
-    right: 3.6rem;
-}
-
-nav a svg {
-    position: absolute;
-    top: -10px;
-    left: 27px;
-    animation: rotate 10s linear infinite;
-}
-
-nav a h2 {
+.h2--nav {
     color: rgba(113, 113, 113, 0.737);
 }
 
-nav a:hover h2 {
+.nav__link:hover .h2--nav {
     color: #00E9E9;
 }
 
-nav section {
+
+/* PAGINATION */
+
+.pagination {
     display: flex;
     align-items: center;
     gap: .5rem;
 }
 
-nav section button {
+.pagination button {
     appearance: none;
     border: none;
     padding: 0rem 1rem;
     background-color: transparent;
 }
 
-/* PAGINATION */
-
 .pagination h3 {
     letter-spacing: normal;
     margin-bottom: 3px;
-}
-
-.pagination button svg {
-    height: 1.2rem;
 }
 
 .pagination button:hover svg path {
@@ -138,7 +157,7 @@ nav section button {
     transform: rotateY(180deg);
 }
 
-/* ALL PLANETS */
+/* SOLAR SYSTEM / ALL PLANETS */
 
 .solar-system {
     display: flex;
@@ -169,11 +188,13 @@ nav section button {
 .all-planets article:hover {
     cursor: pointer;
 }
+
 .all-planets article:hover h3 {
     display: block;
     opacity: 0;
     animation: fade 600ms ease-in 100ms forwards;
 }
+
 .all-planets article:hover aside {
     display: none;
 }
@@ -183,7 +204,7 @@ nav section button {
     border-radius: 50%;
 }
 
-#sun {
+#solis {
     min-height: 40rem;
     min-width: 40rem;
     border: 2px solid white;
@@ -191,10 +212,10 @@ nav section button {
     box-shadow: 0px 0px 30px white;
 }
 
-#mercury {
+#mercurialis {
     min-width: 2rem;
 }
-#mercury aside {
+#mercurialis aside {
     height: 1rem;
     width: 1rem;
 }
@@ -207,10 +228,10 @@ nav section button {
     width: 2rem;
 }
 
-#earth {
+#tellus {
     min-width: 2.2rem;
 }
-#earth aside {
+#tellus aside {
     height: 2.2rem;
     width: 2.2rem;
 }
@@ -223,25 +244,25 @@ nav section button {
     width: 1rem;
 }
 
-#jupiter {
+#lovis {
     min-width: 10rem;
 }
-#jupiter aside {
+#lovis aside {
     min-height: 10rem;
     min-width: 10rem;
 }
 
-#saturn {
+#saturnus {
     min-width: 8rem;
 }
-#saturn aside {
+#saturnus aside {
     height: 8rem;
     width: 8rem;
     position: relative;
     transform: rotateZ(60deg);
 }
 
-#saturn aside .rings {
+#saturnus aside .rings {
     position: absolute;
     top: -2rem;
     left: 3.5rem;
@@ -259,15 +280,15 @@ nav section button {
     min-width: 3rem;
 }
 
-#neptune {
+#neptunus {
     min-width: 3.1rem;
 }
-#neptune aside {
+#neptunus aside {
     min-height: 3.1rem;
     min-width: 3.1rem;
 }
 
-#sun:hover {
+#solis:hover {
     animation: fire 2s ease-out infinite alternate;
     cursor: pointer;
 }
@@ -297,7 +318,7 @@ nav section button {
     margin-top: 2rem;
 }
 
-.planet__img .Saturnus {
+.planet__img .img--saturnus {
     border-radius: 0px;
     box-shadow: none;
 }
