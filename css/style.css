@@ -358,16 +358,28 @@ header {
     background-color: rgba(255, 255, 255, 0.226);
 }
 
-/* SEARCH */
+/* STAR & SEARCH */
 
-.search-section {
+.search-section,
+.star-section {
     position: fixed;
-    bottom: 2rem;
-    right: 2rem;
     cursor: pointer;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
+}
+.search-section{
+    bottom: 2rem;
+    right: 2rem;
     gap: 1rem;
+}
+.star-section {
+    bottom: 5rem;
+    right: 2rem;
+}
+
+.star-section:hover svg,
+.search-section:hover svg {
+    fill: #00E9E9;
 }
 
 .search-section input {
