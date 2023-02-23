@@ -1,5 +1,7 @@
 const rocket = document.getElementById('rocket');
 
+document.addEventListener('keydown', (e) => move(e))
+
 // Sätter styling i html för att kunna nås i funktion nedan
 window.addEventListener('load', () => {
     rocket.style.position = 'absolute';

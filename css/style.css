@@ -366,15 +366,16 @@ header {
     cursor: pointer;
     display: flex;
     align-items: flex-end;
+    gap: 1rem;
 }
 .search-section{
     bottom: 2rem;
     right: 2rem;
-    gap: 1rem;
 }
 .star-section {
     bottom: 5rem;
     right: 2rem;
+    flex-direction: row-reverse;
 }
 
 .star-section:hover svg,

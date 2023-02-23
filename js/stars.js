@@ -1,6 +1,7 @@
-function starToggle(element) {
+import { renderPlanet } from "./main.js";
+
+function starToggle(element, planet) {
     let star = element.querySelector('svg');
-    let starredPlanet = star.dataset.starredPlanet;
     let isStarred = star.dataset.isStarred;
     let toggle = '';
 
@@ -12,39 +13,68 @@ function starToggle(element) {
         star.dataset.isStarred = 'true';
         toggle = 'add';
     }
-
     star.classList.toggle('svg--star-fill');
     // Uppdatera localStorage
-    starredPlanetToLocalStorage(toggle, starredPlanet);
+    starredPlanetToLocalStorage(toggle, planet);
 }
 
-function starredPlanetToLocalStorage(toggle, star) {
+function starredPlanetToLocalStorage(toggle, planet) {
     // Hämta localStorage
     let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
-    // Om det finns, pusha ny planet. Annars, skapa localStorage
+
+    // Om det finns stjärnade planeter, pusha ny planet/ta bort planet. Annars, skapa localStorage
     if (starredPlanets) {
         if (toggle === 'remove') {
-            let index = starredPlanets.indexOf(star);
+            let index = starredPlanets.indexOf(planet);
             starredPlanets.splice(index, 1);
         } else {
-            starredPlanets.push(star);
+            starredPlanets.push(planet);
         }
     } else {
-        starredPlanets = [star];
+        starredPlanets = [planet];
     }
     localStorage.setItem('starredPlanets', JSON.stringify(starredPlanets));
 }
 
 function checkStarredPlanet(planet) {
     let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
-    // Om planet inte finns i localStorage, returnera -1 (gäller båda villkoren)
+    let exists = false;
+
+    // Om localStorage finns och planet har ett värde, leta efter planet i starredPlanets
+    if (starredPlanets && planet) {
+        let result = starredPlanets.find(starredPlanet => starredPlanet.name === planet.name)
+        // Om match, så finns planeten i starredPlanets
+        if (result) {
+            exists = true;
+        } 
+    }
+    return exists;
+}
+
+function renderStarredPlanets() {
+    let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
+    let ulEl = document.getElementById('starred-planets');
+    ulEl.innerHTML = '';
+
+    // Om det finns stjärnade planeter
     if (starredPlanets) {
-        return starredPlanets.indexOf(planet);
+        starredPlanets.forEach(planet => {
+            let liEl = document.createElement('li');
+            liEl.innerHTML = planet.name;
+
+            liEl.addEventListener('click', () => {
+                renderPlanet(planet.latinName)
+            })
+
+            ulEl.appendChild(liEl);
+        });
     } else {
-        return -1;
+        console.log('else');
+        let message = document.createElement('li');
+        message.classList.add('message');
+        message.innerHTML = 'Stjärnmarkera dina favoriter för att lägga till dom här!';
+        ulEl.appendChild(message);
     }
 }
 
-
-
-export { starToggle, checkStarredPlanet };
+export { starToggle, checkStarredPlanet, renderStarredPlanets };

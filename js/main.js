@@ -2,10 +2,12 @@
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./createEl.js";
 import { search } from "./search.js";
 import { move } from "./rocket.js";
+import { renderStarredPlanets } from "./stars.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('solis');
 const searchIcon = document.getElementById('search-icon');
+const starIcon = document.getElementById('star-icon');
 const pagination = document.querySelectorAll('.pagination button');
 
 // Hämtar data direkt och lagrar i localStorage
@@ -23,8 +25,10 @@ planetsUI.forEach(planetUI => {
 })
 
 sunUI.addEventListener('click', () => {
-    let sun = sunUI.getAttribute('name');
-    // console.log(planetUI.getAttribute('id'));
+    let sun = sunUI.getAttribute('id');
+    // Uppdaterar första bokstven till versal
+    let firstLetter = sun.charAt(0).toLocaleUpperCase();
+    sun = firstLetter + sun.slice(1);
     renderPlanet(sun);
 })
 
@@ -44,6 +48,16 @@ searchIcon.addEventListener('click', () => {
     searchInput.addEventListener('input', (event) => search(event.target));
 })
 
+starIcon.addEventListener('click', () => {
+    if (starIcon.dataset.clickTo === 'open') {
+        renderStarredPlanets();
+        starIcon.dataset.clickTo = 'close';
+    } else {
+        starIcon.dataset.clickTo = 'open';
+        document.getElementById('starred-planets').innerHTML = '';
+    }
+})
+
 pagination.forEach(button => {
     button.addEventListener('click', () => {
         let currentPlanetID = parseInt(document.getElementById('page').innerHTML);
@@ -61,7 +75,6 @@ pagination.forEach(button => {
     })
 });
 
-document.addEventListener('keydown', (e) => move(e))
 
 // Gör denna snyggare....
 async function fetchData() {
