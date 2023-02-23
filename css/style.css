@@ -214,6 +214,7 @@ header {
 
 #mercurialis {
     min-width: 2rem;
+    min-height: 2rem;
 }
 #mercurialis aside {
     height: 1rem;
@@ -222,6 +223,7 @@ header {
 
 #venus {
     min-width: 2rem;
+    min-height: 2rem;
 }
 #venus aside {
     height: 2rem;
@@ -230,6 +232,7 @@ header {
 
 #tellus {
     min-width: 2.2rem;
+    min-height: 2.2rem;
 }
 #tellus aside {
     height: 2.2rem;
@@ -238,6 +241,7 @@ header {
 
 #mars {
     min-width: 2rem;
+    min-height: 2rem;
 }
 #mars aside {
     height: 1rem;
@@ -246,6 +250,7 @@ header {
 
 #lovis {
     min-width: 10rem;
+    min-height: 10rem;
 }
 #lovis aside {
     min-height: 10rem;
@@ -254,6 +259,7 @@ header {
 
 #saturnus {
     min-width: 8rem;
+    min-height: 8rem;
 }
 #saturnus aside {
     height: 8rem;
@@ -274,6 +280,7 @@ header {
 
 #uranus {
     min-width: 3rem;
+    min-height: 3rem;
 }
 #uranus aside {
     min-height: 3rem;
@@ -282,6 +289,7 @@ header {
 
 #neptunus {
     min-width: 3.1rem;
+    min-height: 3.1rem;
 }
 #neptunus aside {
     min-height: 3.1rem;
@@ -490,3 +498,4 @@ header {
         box-shadow: none;
     }  */
 }
+
