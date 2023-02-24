@@ -1,7 +1,7 @@
 
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./createEl.js";
 import { search } from "./search.js";
-import { renderStarredPlanets } from "./starred.js";
+import { starredPlanetsUI } from "./starred.js";
 import { move } from "./rocket.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
@@ -124,7 +124,7 @@ searchIcon.addEventListener('click', () => {
 starIcon.addEventListener('click', () => {
     let starredPlanetsEl = document.getElementById('starred-planets');
     starredPlanetsEl.classList.toggle('hide');
-    renderStarredPlanets();
+    starredPlanetsUI();
 })
 
 pagination.forEach(button => {
