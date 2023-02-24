@@ -46,7 +46,7 @@ function createMoonEl(moonArray) {
     let moons = '';
     // Om månar finns
     if (moonArray.length > 0) {
-        // Loopa över månana i arrayen
+        // Loopa över månarna i arrayen
         for (let i = 0; i < moonArray.length; i++) {
             if (i < moonArray.length - 1) {
                 // Om i är mindre än sista index i arrayen
