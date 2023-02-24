@@ -19,8 +19,9 @@ function starToggle(element, planet) {
         toggle = 'add';
     }
     star.classList.toggle('svg--star-fill');
-    // Uppdatera localStorage
+    // Uppdatera localStorage och förbereder UI
     starredPlanetToLocalStorage(toggle, planet);
+    starredPlanetsUI();
 }
 
 function starredPlanetToLocalStorage(toggle, planet) {
@@ -55,7 +56,7 @@ function checkStarredPlanet(planet) {
     return exists;
 }
 
-function renderStarredPlanets() {
+function starredPlanetsUI() {
     let starredPlanets = getStarredPlanertsLocalStorage();
     let ulEl = document.getElementById('starred-planets');
     ulEl.innerHTML = '';
@@ -80,4 +81,4 @@ function renderStarredPlanets() {
     }
 }
 
-export { starToggle, checkStarredPlanet, renderStarredPlanets };
+export { starToggle, checkStarredPlanet, starredPlanetsUI };

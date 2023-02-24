@@ -13,67 +13,6 @@ const pagination = document.querySelectorAll('.pagination button');
 // Hämtar data direkt och lagrar i localStorage
 fetchData();
 
-planetsUI.forEach(planetUI => {
-    planetUI.addEventListener('click', () => {
-        let planetToRender = planetUI.getAttribute('id');
-        // Uppdaterar första bokstven till versal
-        let firstLetter = planetToRender.charAt(0).toLocaleUpperCase();
-        planetToRender = firstLetter + planetToRender.slice(1);
-        renderPlanet(planetToRender);
-    })
-})
-
-sunUI.addEventListener('click', () => {
-    let sun = sunUI.getAttribute('id');
-    // Uppdaterar första bokstven till versal
-    let firstLetter = sun.charAt(0).toLocaleUpperCase();
-    sun = firstLetter + sun.slice(1);
-    renderPlanet(sun);
-})
-
-searchIcon.addEventListener('click', () => {
-    let searchInput = document.getElementById('search-input');
-    searchInput.classList.toggle('hide');
-    
-    if (searchIcon.dataset.clickTo === 'open') {
-        searchIcon.dataset.clickTo = 'close';
-    } else {
-        searchIcon.dataset.clickTo = 'open';
-
-        // Tömmer searchInput och rensar tidigare resultat
-        searchInput.value = '';
-        search(searchInput);
-    }
-    searchInput.addEventListener('input', (event) => search(event.target));
-})
-
-starIcon.addEventListener('click', () => {
-    if (starIcon.dataset.clickTo === 'open') {
-        renderStarredPlanets();
-        starIcon.dataset.clickTo = 'close';
-    } else {
-        starIcon.dataset.clickTo = 'open';
-        document.getElementById('starred-planets').innerHTML = '';
-    }
-})
-
-pagination.forEach(button => {
-    button.addEventListener('click', () => {
-        let currentPlanetID = parseInt(document.getElementById('page').innerHTML);
-        let planets = getLocalStorage();
-        let index = currentPlanetID;
-
-        if (currentPlanetID > 0 && button.dataset.planet === 'previous') {
-            index = index -1;
-        } else if (currentPlanetID < 8 && button.dataset.planet === 'next') {
-            index = index +1;
-        } 
-
-        let newPlanet = planets[index].latinName;
-        renderPlanet(newPlanet);
-    })
-});
-
 async function fetchData() {
     try {
         const API_URL = ('https://majazocom.github.io/Data/solaris.json');
@@ -149,5 +88,63 @@ function renderPlanet(planetLatinName) {
         }
     })
 }
+
+planetsUI.forEach(planetUI => {
+    planetUI.addEventListener('click', () => {
+        let planetToRender = planetUI.getAttribute('id');
+        // Uppdaterar första bokstven till versal
+        let firstLetter = planetToRender.charAt(0).toLocaleUpperCase();
+        planetToRender = firstLetter + planetToRender.slice(1);
+        renderPlanet(planetToRender);
+    })
+})
+
+sunUI.addEventListener('click', () => {
+    let sun = sunUI.getAttribute('id');
+    // Uppdaterar första bokstven till versal
+    let firstLetter = sun.charAt(0).toLocaleUpperCase();
+    sun = firstLetter + sun.slice(1);
+    renderPlanet(sun);
+})
+
+searchIcon.addEventListener('click', () => {
+    let searchInput = document.getElementById('search-input');
+    
+    // Om elementet inte har klassen hide sedan innan,
+    // ska sökresultat och söksträng rensas
+    if (!searchInput.classList.contains('hide')) {
+        searchInput.value = '';
+        search(searchInput);
+    }
+    
+    searchInput.classList.toggle('hide');
+    searchInput.addEventListener('input', (event) => search(event.target));
+})
+
+starIcon.addEventListener('click', () => {
+    let starredPlanetsEl = document.getElementById('starred-planets');
+    starredPlanetsEl.classList.toggle('hide');
+    renderStarredPlanets();
+})
+
+pagination.forEach(button => {
+    button.addEventListener('click', () => {
+        // Hämta id för planeten som visas
+        let currentPlanetID = parseInt(document.getElementById('page').innerHTML);
+        let planets = getLocalStorage();
+        // Sätt index till planetens ID
+        let index = currentPlanetID;
+
+        // Uppdatera id
+        if (currentPlanetID > 0 && button.dataset.planet === 'previous') {
+            index = index -1;
+        } else if (currentPlanetID < 8 && button.dataset.planet === 'next') {
+            index = index +1;
+        } 
+
+        let newPlanet = planets[index].latinName;
+        renderPlanet(newPlanet);
+    })
+});
 
 export { getLocalStorage, renderPlanet };

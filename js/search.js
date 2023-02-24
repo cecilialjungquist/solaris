@@ -6,7 +6,7 @@ function search(inputString) {
     let searchResults = [];
 
     // Om inputString är längre än noll, loopa över planeter 
-    // och pusha i searchResults om matchning med inputString
+    // och pusha i searchResults om matchning med inputString finns
     if (inputString.length > 0) {
         for (let i = 0; i < planets.length; i++) {
     

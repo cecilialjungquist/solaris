@@ -110,14 +110,12 @@ function catchAlien() {
 
 function startTimer() {
     let footer = document.querySelector('footer');
-    let timerUI = document.createElement('article');
-    timerUI.classList.add('timer');
+    let timerUI = document.createElement('p');
     let time = 31;
-
-    // Kolla hur många aliens som är kvar? Array?
-    // Nåt meddelande på skärmen?
     
-    footer.appendChild(timerUI)
+    timerUI.classList.add('timer');
+    footer.appendChild(timerUI);
+
     const timer = setInterval(() => {
         time--;
         timerUI.innerHTML = time;
