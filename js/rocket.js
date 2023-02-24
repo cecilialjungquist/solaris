@@ -10,27 +10,14 @@ window.addEventListener('load', () => {
 });
 
 rocket.addEventListener('click', () => {
-  
-    // Om raketen inte är aktiv, aktivera den. Annars gör den inaktiv och "nollställ"
     if (rocket.dataset.active === 'not-active') {
-        rocket.dataset.active = 'active';
-        // Lägg till animering
-        rocket.classList.add('launch-rocket');
-        // Skapa aliens
-        showAliens();
+        startGame();
     } else if (rocket.dataset.active === 'active') {
-        rocket.style.bottom = '32px';
-        rocket.style.left = '32px';
-        rocket.style.transform = 'rotateZ(0deg)';
-        rocket.dataset.active = 'not-active';
-        rocket.classList.remove('launch-rocket');
-        document.querySelectorAll('.alien').forEach(alien => alien.remove());
+        resetGame();
     }
-})
-
+});
 
 function move(e) {
-    let aliens = document.querySelectorAll('.alien');
     let direction = e.key;    
     let previousLocationY = parseInt(rocket.style.bottom);
     let previousLocationX = parseInt(rocket.style.left);
@@ -39,18 +26,6 @@ function move(e) {
     const body = document.querySelector('body');
     let maxY = body.offsetHeight;
     let maxX = body.offsetWidth;
-    let rocketlocation = rocket.getBoundingClientRect();
-    
-    aliens.forEach(alien => {
-        let alienLocation = alien.getBoundingClientRect();
-
-        if (alienLocation.left > rocketlocation.left 
-            && alienLocation.right < rocketlocation.right
-            && alienLocation.top > rocketlocation.top
-            && alienLocation.bottom < rocketlocation.bottom) {
-                alien.remove();
-        }
-    })
 
     if (rocket.dataset.active === 'active') {
         
@@ -63,6 +38,8 @@ function move(e) {
         } else if (direction === 'ArrowLeft' && previousLocationX > 60) {
             moveLeft(previousLocationX);
         }
+
+        catchAlien();
     }
 }
 
@@ -83,17 +60,52 @@ function moveLeft(previousLocationX) {
     rocket.style.transform = 'rotateZ(-90deg)';
 }
 
-function showAliens() {
+function startGame() {
     let body = document.querySelector('body');
+    // Ändra raketen till aktiv
+    rocket.dataset.active = 'active';
+    // Lägg till animering
+    rocket.classList.add('launch-rocket');
+
+    // Rendera ut 10 aliens
     for (let i = 0; i < 10; i++) {
         let alien = document.createElement('div');
         alien.classList.add('alien');
+        // Ge varje alien en "random" position
         alien.style.top = Math.floor(Math.random() * 400 + 64) + 'px';
         alien.style.left = Math.floor(Math.random() * 1000 + 64) + 'px';
         body.appendChild(alien);
-        let alienLocationY = alien.getBoundingClientRect();
-        console.log(alienLocationY);
     }
+}
+
+function resetGame() {
+    // "Nollställ" raket och ta bort resterande aliens
+    rocket.style.bottom = '32px';
+    rocket.style.left = '32px';
+    rocket.style.transform = 'rotateZ(0deg)';
+    rocket.dataset.active = 'not-active';
+    rocket.classList.remove('launch-rocket');
+    document.querySelectorAll('.alien').forEach(alien => alien.remove());
+}
+
+function catchAlien() {
+    let aliens = document.querySelectorAll('.alien');
+    // Hämta location av rocket
+    let rocketlocation = rocket.getBoundingClientRect();
+    
+    aliens.forEach(alien => {
+        // Hämta location av alien
+        let alienLocation = alien.getBoundingClientRect();
+
+        if (alienLocation.left > rocketlocation.left 
+            && alienLocation.right < rocketlocation.right
+            && alienLocation.top > rocketlocation.top
+            && alienLocation.bottom < rocketlocation.bottom) {
+                // Om villkoren ovan stämmer, är alien fångad. Ta bort alien.
+                alien.remove();
+        }
+    })
+
 }
 
 export { move };
