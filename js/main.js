@@ -22,7 +22,6 @@ async function fetchData() {
         // Om data ok, lagra i localStorage
         if (data.ok) {
             data = await data.json();
-            console.log(data);
             localStorage.setItem('planets', JSON.stringify(data));
         // Annars skriv ut meddelande med felkod
         } else {
