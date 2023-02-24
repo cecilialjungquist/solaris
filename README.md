@@ -10,4 +10,6 @@
 * Spel! Helt obruten mark inför den här uppgiften. Genom att klicka på raketen aktiveras spelet och användaren får samla in utomjordingar, tiden användaren har på sig är 30 sek. 
 
 ## Övrigt
-För den här uppgiften fick vi ett designförslag från vår utbildningsleverantör ZoCom. Jag valde att uppdatera designen lite med bilder från unsplash. Länk till figma-skiss hittar ni <a href="https://www.figma.com/file/Ib9ahPsFNPG2orLozJ0WL2/JS-%2F-Solaris-(Copy)?node-id=0%3A1&t=NL38KYhOof2O8uf9-0">här</a>. 
+För den här uppgiften fick vi ett designförslag från vår utbildningsleverantör ZoCom. Jag valde att uppdatera designen lite med bilder från unsplash. Länk till figma-skiss hittar ni <a href="https://www.figma.com/file/Ib9ahPsFNPG2orLozJ0WL2/JS-%2F-Solaris-(Copy)?node-id=0%3A1&t=NL38KYhOof2O8uf9-0">här</a>. Sidan är INTE anpassad för tablet/mobile i nuläget.
+
+https://cecilialjungquist.github.io/solar-system/
