@@ -87,6 +87,7 @@ function resetGame() {
     rocket.dataset.active = 'not-active';
     rocket.classList.remove('launch-rocket');
     document.querySelectorAll('.alien').forEach(alien => alien.remove());
+    document.querySelector('.timer').remove();
 }
 
 function catchAlien() {
@@ -123,7 +124,6 @@ function startTimer() {
         timerUI.innerHTML = time;
         if (time < 0) {
             clearInterval(timer);
-            timerUI.remove();
             resetGame();
         }
     }, 1000);
