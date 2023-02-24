@@ -1,5 +1,4 @@
 const rocket = document.getElementById('rocket');
-
 document.addEventListener('keydown', (e) => move(e))
 
 // Sätter styling i html för att kunna nås i funktion nedan
@@ -110,7 +109,7 @@ function catchAlien() {
 }
 
 function startTimer() {
-    let wrapper = document.querySelector('.wrapper--solar-system');
+    let footer = document.querySelector('footer');
     let timerUI = document.createElement('article');
     timerUI.classList.add('timer');
     let time = 31;
@@ -118,7 +117,7 @@ function startTimer() {
     // Kolla hur många aliens som är kvar? Array?
     // Nåt meddelande på skärmen?
     
-    wrapper.appendChild(timerUI)
+    footer.appendChild(timerUI)
     const timer = setInterval(() => {
         time--;
         timerUI.innerHTML = time;
