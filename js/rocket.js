@@ -76,6 +76,7 @@ function startGame() {
         alien.style.left = Math.floor(Math.random() * 1000 + 64) + 'px';
         body.appendChild(alien);
     }
+    startTimer();
 }
 
 function resetGame() {
@@ -105,7 +106,27 @@ function catchAlien() {
                 alien.remove();
         }
     })
+}
 
+function startTimer() {
+    let wrapper = document.querySelector('.wrapper--solar-system');
+    let timerUI = document.createElement('article');
+    timerUI.classList.add('timer');
+    let time = 31;
+
+    // Kolla hur många aliens som är kvar? Array?
+    // Nåt meddelande på skärmen?
+    
+    wrapper.appendChild(timerUI)
+    const timer = setInterval(() => {
+        time--;
+        timerUI.innerHTML = time;
+        if (time < 0) {
+            clearInterval(timer);
+            timerUI.remove();
+            resetGame();
+        }
+    }, 1000);
 }
 
 export { move };
