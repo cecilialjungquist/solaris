@@ -1,8 +1,9 @@
 
-import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./createEl.js";
+import { createPlanetHTML} from "./createEl.js";
 import { search } from "./search.js";
-import { starredPlanetsUI } from "./starred.js";
+import { starredPlanetsUI, starToggle } from "./starred.js";
 import { move } from "./rocket.js";
+
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('solis');
@@ -25,14 +26,17 @@ async function fetchData() {
             localStorage.setItem('planets', JSON.stringify(data));
         // Annars skriv ut meddelande med felkod
         } else {
-            let section = createSectionEl('Oh, no!', `We've encountered an error of `, data.status);
+            let section = document.createElement('section');
+            section.innerHTML = `
+            <h3>Oh, no!</h3>
+            <p>We've encountered an error of ${data.status}! Please try again later.</p>
+            `;
             document.querySelector('body').appendChild(section);
             section.style.padding = '2rem';
             document.querySelector('.wrapper--solar-system').classList.add('hide');
         }
 
     } catch (error) {
-        // Ska detta också skrivas ut på skärmen+
         console.log('Oh no! Error: ', error);
     }
 }
@@ -45,46 +49,26 @@ function renderPlanet(planetLatinName) {
     document.querySelector('.wrapper--solar-system').classList.add('hide');
     document.querySelector('nav').classList.remove('hide');
 
-    // Hämtar alla planeter
+    // Hämtar alla planeter och nödvändiga element
     let planets = getLocalStorage();
-
-    // Skapar "föräldrar"
     let wrapper = document.querySelector('.wrapper--planet');
     let pageEl = document.getElementById('page');
-    let main = document.createElement('main');
-    let imgSection = document.createElement('section');
-    let infoSection = document.createElement('section');
-    let gridSection = document.createElement('section');
 
     wrapper.classList.remove('hide');
     wrapper.innerHTML = '';
 
-    main.classList.add('planet');
-    imgSection.classList.add('planet__img');
-    infoSection.classList.add('planet__info');
-    gridSection.classList.add('planet__grid');
-
     planets.forEach(planet => {
         // Villkor för att rendera rätt planet
         if (planetLatinName === planet.latinName) {
-            // Skapar alla element
-            let img = createImgEl(planet);
-            let header = createHeaderEl(planet)
-            let lineTop = createLineEl();
-            let circumFerenceSection = createSectionEl('Omkrets', planet.circumference, 'km');
-            let distanceSection = createSectionEl('KM från Solen', planet.distance, 'km');
-            let tempDaySection = createSectionEl('Max temperatur', planet.temp.day, '°C');
-            let tempNightSection = createSectionEl('Min temperatur', planet.temp.night, '°C');
-            let lineBottom = createLineEl();
-            let moonSection = createMoonEl(planet.moons);
-
+            // Skapar HTML
+            let planetCard = createPlanetHTML(planet);
             // Lägg till element i rätt förälder och rendera ut i UI och uppdatera paginaiton
-            imgSection.append(img);
-            gridSection.append(circumFerenceSection, distanceSection, tempDaySection, tempNightSection);
-            infoSection.append(header, lineTop, gridSection, lineBottom, moonSection);
-            main.append(imgSection, infoSection);
-            wrapper.append(main);
-            pageEl.innerHTML = planet.id;            
+            wrapper.append(planetCard);
+            pageEl.innerHTML = planet.id; 
+            
+            // Lägger till eventlyssnare på starIcon för "favoriter"
+            let starIcon = planetCard.querySelector('.svg--star');
+            starIcon.addEventListener('click', () => starToggle(starIcon, planet));
         }
     })
 }
