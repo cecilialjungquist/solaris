@@ -1,8 +1,8 @@
 
 import { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl } from "./createEl.js";
 import { search } from "./search.js";
+import { renderStarredPlanets } from "./starred.js";
 import { move } from "./rocket.js";
-import { renderStarredPlanets } from "./stars.js";
 
 const planetsUI = document.querySelectorAll('.all-planets article');
 const sunUI = document.getElementById('solis');
@@ -19,7 +19,6 @@ planetsUI.forEach(planetUI => {
         // Uppdaterar första bokstven till versal
         let firstLetter = planetToRender.charAt(0).toLocaleUpperCase();
         planetToRender = firstLetter + planetToRender.slice(1);
-
         renderPlanet(planetToRender);
     })
 })
@@ -75,8 +74,6 @@ pagination.forEach(button => {
     })
 });
 
-
-// Gör denna snyggare....
 async function fetchData() {
     try {
         const API_URL = ('https://majazocom.github.io/Data/solaris.json');
@@ -96,6 +93,7 @@ async function fetchData() {
         }
 
     } catch (error) {
+        // Ska detta också skrivas ut på skärmen+
         console.log('Oh no! Error: ', error);
     }
 }
@@ -108,10 +106,13 @@ function renderPlanet(planetLatinName) {
     document.querySelector('.wrapper--solar-system').classList.add('hide');
     document.querySelector('nav').classList.remove('hide');
 
+    // Hämtar alla planeter
     let planets = getLocalStorage();
+
+    // Skapar "föräldrar"
     let wrapper = document.querySelector('.wrapper--planet');
     let pageEl = document.getElementById('page');
-    let article = document.createElement('article');
+    let main = document.createElement('main');
     let imgSection = document.createElement('section');
     let infoSection = document.createElement('section');
     let gridSection = document.createElement('section');
@@ -119,14 +120,15 @@ function renderPlanet(planetLatinName) {
     wrapper.classList.remove('hide');
     wrapper.innerHTML = '';
 
-    article.classList.add('planet');
+    main.classList.add('planet');
     imgSection.classList.add('planet__img');
     infoSection.classList.add('planet__info');
     gridSection.classList.add('planet__grid');
 
     planets.forEach(planet => {
+        // Villkor för att rendera rätt planet
         if (planetLatinName === planet.latinName) {
-            // console.log(planet.name);
+            // Skapar alla element
             let img = createImgEl(planet);
             let header = createHeaderEl(planet)
             let lineTop = createLineEl();
@@ -137,12 +139,12 @@ function renderPlanet(planetLatinName) {
             let lineBottom = createLineEl();
             let moonSection = createMoonEl(planet.moons);
 
-            // Lägg till element i UI
+            // Lägg till element i rätt förälder och rendera ut i UI och uppdatera paginaiton
             imgSection.append(img);
             gridSection.append(circumFerenceSection, distanceSection, tempDaySection, tempNightSection);
             infoSection.append(header, lineTop, gridSection, lineBottom, moonSection);
-            article.append(imgSection, infoSection);
-            wrapper.append(article);
+            main.append(imgSection, infoSection);
+            wrapper.append(main);
             pageEl.innerHTML = planet.id;            
         }
     })

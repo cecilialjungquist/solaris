@@ -1,25 +1,19 @@
-import { starToggle, checkStarredPlanet } from "./stars.js";
+import { starToggle, checkStarredPlanet } from "./starred.js";
 
 function createImgEl(planet) {
-
-    // Nån if-sats här? Vad händer om bilden inte finns?
-
     let latinName = planet.latinName.toLowerCase();
     let img = document.createElement('img');
     let src = `img/${latinName}.png`;
     img.setAttribute('src', src);
     img.classList.add(`img--${latinName}`);
     
-    // console.log(img)
     return img;
 }
 
 function createHeaderEl(planet) {
     let header = document.createElement('header');
     let star = createStarEl(planet);
-
     header.classList.add('planet__header');
-
     header.innerHTML = `
     <h1>${planet.name}</h1>
     <h2>${planet.latinName}</h2>
@@ -55,8 +49,10 @@ function createMoonEl(moonArray) {
         // Loopa över månana i arrayen
         for (let i = 0; i < moonArray.length; i++) {
             if (i < moonArray.length - 1) {
+                // Om i är mindre än sista index i arrayen
                 moons += moonArray[i] + ', ';
             } else {
+                // Om i är sista index i arrayen
                 moons += moonArray[i];
             }
         }
@@ -88,5 +84,6 @@ function createStarEl(planet) {
     star.addEventListener('click', () => starToggle(star, planet));
     return star;  
 }
+
 
 export { createImgEl, createHeaderEl, createLineEl, createSectionEl, createMoonEl };

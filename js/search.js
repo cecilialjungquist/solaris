@@ -51,12 +51,11 @@ function renderSearchResults(results, inputString) {
         results.forEach(result => {
             let liEl = document.createElement('li');
             liEl.innerHTML = result.name;
-            ulEl.appendChild(liEl);
             liEl.addEventListener('click', () => {
                 renderPlanet(result.latinName);
             })
+            ulEl.appendChild(liEl);
         })
-        // console.log(ulEl);
         searchSection.insertAdjacentElement('afterbegin', ulEl)
     }
 

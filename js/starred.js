@@ -1,6 +1,11 @@
 import { renderPlanet } from "./main.js";
 
+function getStarredPlanertsLocalStorage() {
+    return JSON.parse(localStorage.getItem('starredPlanets'));
+}
+
 function starToggle(element, planet) {
+    // Hanterar stjärnmarkering för varje planet
     let star = element.querySelector('svg');
     let isStarred = star.dataset.isStarred;
     let toggle = '';
@@ -19,8 +24,7 @@ function starToggle(element, planet) {
 }
 
 function starredPlanetToLocalStorage(toggle, planet) {
-    // Hämta localStorage
-    let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
+    let starredPlanets = getStarredPlanertsLocalStorage();
 
     // Om det finns stjärnade planeter, pusha ny planet/ta bort planet. Annars, skapa localStorage
     if (starredPlanets) {
@@ -37,7 +41,7 @@ function starredPlanetToLocalStorage(toggle, planet) {
 }
 
 function checkStarredPlanet(planet) {
-    let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
+    let starredPlanets = getStarredPlanertsLocalStorage();
     let exists = false;
 
     // Om localStorage finns och planet har ett värde, leta efter planet i starredPlanets
@@ -52,24 +56,23 @@ function checkStarredPlanet(planet) {
 }
 
 function renderStarredPlanets() {
-    let starredPlanets = JSON.parse(localStorage.getItem('starredPlanets'));
+    let starredPlanets = getStarredPlanertsLocalStorage();
     let ulEl = document.getElementById('starred-planets');
     ulEl.innerHTML = '';
 
-    // Om det finns stjärnade planeter
-    if (starredPlanets) {
+    // Om det finns stjärnade planeter 
+    if (starredPlanets && starredPlanets.length > 0) {
         starredPlanets.forEach(planet => {
             let liEl = document.createElement('li');
             liEl.innerHTML = planet.name;
-
             liEl.addEventListener('click', () => {
                 renderPlanet(planet.latinName)
             })
 
             ulEl.appendChild(liEl);
         });
+    // Annars skriv ut hjälpmeddelande
     } else {
-        console.log('else');
         let message = document.createElement('li');
         message.classList.add('message');
         message.innerHTML = 'Stjärnmarkera dina favoriter för att lägga till dom här!';
