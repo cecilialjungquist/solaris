@@ -12,4 +12,4 @@
 ## Övrigt
 För den här uppgiften fick vi ett designförslag från vår utbildningsleverantör ZoCom. Jag valde att uppdatera designen lite med bilder från unsplash. Länk till figma-skiss hittar ni <a href="https://www.figma.com/file/Ib9ahPsFNPG2orLozJ0WL2/JS-%2F-Solaris-(Copy)?node-id=0%3A1&t=NL38KYhOof2O8uf9-0">här</a>. Sidan är INTE anpassad för tablet/mobile i nuläget.
 
-https://cecilialjungquist.github.io/solar-system/
+https://cecilialjungquist.github.io/solaris/
